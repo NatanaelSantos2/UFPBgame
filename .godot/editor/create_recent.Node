@@ -1,0 +1,14 @@
+CanvasModulate
+Node2D
+LightOccluder2D
+PointLight2D
+CollisionShape2D
+Area2D
+ColorRect
+CanvasGroup
+Window
+DirectionalLight2D
+WorldEnvironment
+Polygon2D
+TileMapLayer
+CollisionPolygon2D

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvf2swa70yhec"]
+
+[ext_resource type="Script" uid="uid://c06ub566md6ko" path="res://RoomNight.gd" id="1_wtcfe"]
+
+[sub_resource type="Gradient" id="Gradient_0e48y"]
+offsets = PackedFloat32Array(0.8666667, 0.96, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.39344263, 0.39344263, 0.39344263, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_epypp"]
+gradient = SubResource("Gradient_0e48y")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
+size = Vector2(438.18484, 330.3241)
+
+[node name="RoomNight" type="Node2D"]
+script = ExtResource("1_wtcfe")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+rotation = 0.4712389
+scale = Vector2(7.5, 5.5)
+skew = 0.62831855
+blend_mode = 1
+texture = SubResource("GradientTexture2D_epypp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 0.4712389
+skew = 0.62831855
+shape = SubResource("RectangleShape2D_0hol4")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

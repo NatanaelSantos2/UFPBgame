@@ -1,3 +1,4 @@
+TileMapLayer
 CanvasModulate
 Node2D
 LightOccluder2D
@@ -10,5 +11,4 @@ Window
 DirectionalLight2D
 WorldEnvironment
 Polygon2D
-TileMapLayer
 CollisionPolygon2D

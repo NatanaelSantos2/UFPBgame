@@ -1,4 +1,4 @@
-[gd_scene load_steps=572 format=4 uid="uid://ctkvpj7tcv0bd"]
+[gd_scene load_steps=574 format=4 uid="uid://ctkvpj7tcv0bd"]
 
 [ext_resource type="PackedScene" uid="uid://cdr27w7jh4akv" path="res://Scene/Player/player.tscn" id="1_qh4hx"]
 [ext_resource type="PackedScene" uid="uid://ch5krxoutstq8" path="res://Scene/Ui/control.tscn" id="2_1uo3k"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://clc7b3cdyxrge" path="res://mapacampus.jpeg" id="21_c6u0e"]
 [ext_resource type="Texture2D" uid="uid://b7rkkb6lmyeok" path="res://Assets/2D/roof.png" id="21_ckab0"]
 [ext_resource type="PackedScene" uid="uid://bvf2swa70yhec" path="res://RoomNight.tscn" id="22_ccdlt"]
+[ext_resource type="Script" uid="uid://cxryhbpke84ek" path="res://script/Ladder/ladderSalaDeAula/ladder.gd" id="23_k0x61"]
 [ext_resource type="Texture2D" uid="uid://dc0l62b5in18l" path="res://Assets/2D/ladderRoom.png" id="23_vefif"]
 [ext_resource type="Texture2D" uid="uid://c0y3ythjhra5q" path="res://Assets/2D/roundSquare.png" id="25_h40u6"]
 
@@ -4331,6 +4332,9 @@ tile_layout = 5
 tile_size = Vector2i(32, 16)
 sources/0 = SubResource("TileSetAtlasSource_xd1nf")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xug77"]
+size = Vector2(3.2941895, 90.79401)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_heffv"]
 texture = ExtResource("8_3vqva")
 texture_region_size = Vector2i(32, 16)
@@ -4995,7 +4999,8 @@ sources/0 = SubResource("TileSetAtlasSource_8uknk")
 y_sort_enabled = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("joystick") groups=["player"] instance=ExtResource("1_qh4hx")]
-position = Vector2(379, 99)
+z_index = 2
+position = Vector2(-1350, -880)
 joystick = NodePath("../Control/CanvasLayer/Joystick")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
@@ -6377,20 +6382,20 @@ y_sort_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="SalaDeAula/firstFloor/walls/sala1/Within/Block2"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAC3/xwAAAAAAAYAAAC2/xwAAAAAAAYAAAC1/xwAAAAAAAYAAAC0/xwAAAAAAAYAAACz/xwAAAAAAAYAAACy/xwAAAAAAAYAAACx/xwAAAAAAAYAAACw/xwAAAAAAAYAAACv/xwAAAAAAAYAAACu/xwAAAAAAAYAAACt/xwAAAAAAAYAAACs/xwAAAAAAAYAAACr/xwAAAAAAAYAAACq/xwAAAAAAAYAAACp/xwAAAAAAAYAAACo/xwAAAAAAAYAAACn/xwAAAAAAAYAAACm/xwAAAAAAAYAAACl/xwAAAAAAAYAAACk/xwAAAAAAAYAAACj/xwAAAAAAAYAAACi/xwAAAAAAAYAAACh/xwAAAAAAAYAAACg/xwAAAAAAAYAAACf/xwAAAAAAAYAAACe/xwAAAAAAAYAAACd/xwAAAAAAAYAAAC3/zAAAAAAAAYAAAC2/zAAAAAAAAYAAAC1/zAAAAAAAAYAAAC0/zAAAAAAAAYAAACz/zAAAAAAAAYAAACy/zAAAAAAAAYAAACx/zAAAAAAAAYAAACw/zAAAAAAAAYAAACv/zAAAAAAAAYAAACu/zAAAAAAAAYAAACt/zAAAAAAAAYAAACs/zAAAAAAAAYAAACr/zAAAAAAAAYAAACq/zAAAAAAAAYAAACp/zAAAAAAAAYAAACo/zAAAAAAAAYAAACn/zAAAAAAAAYAAACm/zAAAAAAAAYAAACl/zAAAAAAAAYAAACk/zAAAAAAAAYAAACj/zAAAAAAAAYAAACi/zAAAAAAAAYAAACh/zAAAAAAAAYAAACg/zAAAAAAAAYAAACf/zAAAAAAAAYAAACe/zAAAAAAAAYAAACd/zAAAAAAAAYAAACp//7/AAABAAYAAACp////AAABAAYAAACp/wAAAAABAAYAAACp/wEAAAABAAYAAACp/wIAAAABAAYAAACp/wMAAAABAAYAAACp/wQAAAABAAYAAACp/wUAAAABAAYAAACp/wYAAAABAAYAAACp/wcAAAABAAYAAACp//3/AAABAAYAAACs/wAAAAAAAAYAAACr/wAAAAAAAAYAAACq/wAAAAAAAAYAAACt/wAAAAAAAAYAAACu/wAAAQACAAYAAACu////AAABAAYAAACu//7/AAABAAYAAACu//3/AAABAAYAAAA=")
+tile_map_data = PackedByteArray("AAC3/xwAAAAAAAYAAAC2/xwAAAAAAAYAAAC1/xwAAAAAAAYAAAC0/xwAAAAAAAYAAACz/xwAAAAAAAYAAACy/xwAAAAAAAYAAACx/xwAAAAAAAYAAACw/xwAAAAAAAYAAACv/xwAAAAAAAYAAACu/xwAAAAAAAYAAACt/xwAAAAAAAYAAACs/xwAAAAAAAYAAACr/xwAAAAAAAYAAACq/xwAAAAAAAYAAACp/xwAAAAAAAYAAACo/xwAAAAAAAYAAACn/xwAAAAAAAYAAACm/xwAAAAAAAYAAACl/xwAAAAAAAYAAACk/xwAAAAAAAYAAACj/xwAAAAAAAYAAACi/xwAAAAAAAYAAACh/xwAAAAAAAYAAACg/xwAAAAAAAYAAACf/xwAAAAAAAYAAACe/xwAAAAAAAYAAACd/xwAAAAAAAYAAAC3/zAAAAAAAAYAAAC2/zAAAAAAAAYAAAC1/zAAAAAAAAYAAAC0/zAAAAAAAAYAAACz/zAAAAAAAAYAAACy/zAAAAAAAAYAAACx/zAAAAAAAAYAAACw/zAAAAAAAAYAAACv/zAAAAAAAAYAAACu/zAAAAAAAAYAAACt/zAAAAAAAAYAAACs/zAAAAAAAAYAAACr/zAAAAAAAAYAAACq/zAAAAAAAAYAAACp/zAAAAAAAAYAAACo/zAAAAAAAAYAAACn/zAAAAAAAAYAAACm/zAAAAAAAAYAAACl/zAAAAAAAAYAAACk/zAAAAAAAAYAAACj/zAAAAAAAAYAAACi/zAAAAAAAAYAAACh/zAAAAAAAAYAAACg/zAAAAAAAAYAAACf/zAAAAAAAAYAAACe/zAAAAAAAAYAAACd/zAAAAAAAAYAAACp//7/AAABAAYAAACp////AAABAAYAAACp/wAAAAABAAYAAACp/wEAAAABAAYAAACp/wIAAAABAAYAAACp/wMAAAABAAYAAACp/wQAAAABAAYAAACp/wUAAAABAAYAAACp/wYAAAABAAYAAACp/wcAAAABAAYAAACp//3/AAABAAYAAACu////AAABAAYAAACu//7/AAABAAYAAACu//3/AAABAAYAAACq/wEAAAAAAAYAAACr/wEAAAAAAAYAAACs/wEAAAAAAAYAAACt/wEAAAAAAAYAAACu/wEAAQACAAYAAACu/wAAAAABAAYAAAA=")
 tile_set = SubResource("TileSet_heffv")
 
 [node name="Elevator" type="Node2D" parent="SalaDeAula/firstFloor/walls/sala1"]
 y_sort_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="SalaDeAula/firstFloor/walls/sala1/Elevator"]
-z_index = -1
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AACt//3/AAAAAAMAAAA=")
 tile_set = SubResource("TileSet_t7bre")
 
 [node name="Ladder" type="Node2D" parent="SalaDeAula/firstFloor/walls/sala1"]
 y_sort_enabled = true
+script = ExtResource("23_k0x61")
 
 [node name="TileMapLow" type="TileMapLayer" parent="SalaDeAula/firstFloor/walls/sala1/Ladder"]
 y_sort_enabled = true
@@ -6401,6 +6406,16 @@ tile_set = SubResource("TileSet_2avy7")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AACb////AAAAABYAAAA=")
 tile_set = SubResource("TileSet_0jgv1")
+
+[node name="Area2D" type="Area2D" parent="SalaDeAula/firstFloor/walls/sala1/Ladder"]
+z_index = 1
+position = Vector2(-1474, -814)
+rotation = 1.1082841
+
+[node name="Collision" type="CollisionShape2D" parent="SalaDeAula/firstFloor/walls/sala1/Ladder/Area2D"]
+position = Vector2(-5.6602783, 8.046753)
+scale = Vector2(1.0000004, 1.0000004)
+shape = SubResource("RectangleShape2D_xug77")
 
 [node name="sala2" type="Node2D" parent="SalaDeAula/firstFloor/walls"]
 y_sort_enabled = true
@@ -6676,6 +6691,7 @@ tile_set = SubResource("TileSet_38jgy")
 [connection signal="body_entered" from="Laboratorios/firstFloor/Walls/Lab1/Ladder/AreaLowReset" to="Laboratorios/firstFloor/Walls/Lab1/Ladder" method="_on_area_low_reset_body_entered"]
 [connection signal="body_entered" from="Laboratorios/firstFloor/Walls/Lab1/Ladder/AreaTop" to="Laboratorios/firstFloor/Walls/Lab1/Ladder" method="_on_area_top_body_entered"]
 [connection signal="body_entered" from="Laboratorios/firstFloor/Walls/Lab1/Ladder/AreaTopExit" to="Laboratorios/firstFloor/Walls/Lab1/Ladder" method="_on_area_top_exit_body_entered"]
+[connection signal="body_entered" from="SalaDeAula/firstFloor/walls/sala1/Ladder/Area2D" to="SalaDeAula/firstFloor/walls/sala1/Ladder" method="_on_area_2d_body_entered"]
 
 [editable path="Control"]
 [editable path="Laboratorios/firstFloor/Walls/Lab1/Night/RoomNight3"]
